@@ -6,25 +6,28 @@ public class PlatformManagerController : MonoBehaviour
     private GameObject[] platformPrefab;
 
     [SerializeField]
-    private float timeBetweenSpawns = 3f;
-    private float timeLeft;
+    private float speedIncrimentTime = 5f;
 
-    void Start()
+    private float speedIncrimentTimer;
+
+    private void Start()
     {
-        timeLeft = timeBetweenSpawns;
+        speedIncrimentTimer = speedIncrimentTime;
+    }
+    private void Update()
+    {
+        speedIncrimentTimer -= Time.deltaTime;
+        if (speedIncrimentTimer < 0)
+        {
+            GlobalGameStats.platformSpeed += 0.2f;
+            speedIncrimentTimer = speedIncrimentTime;
+        }
     }
 
-    void Update()
+    public void SpawnPlatform()
     {
-        timeLeft -= Time.deltaTime;
-
-        if (timeLeft <= 0)
-        {
-            Instantiate(platformPrefab[Random.Range(0, 3)],
-                        new Vector3(35, Random.Range(-4, 2), 0),
-                        new Quaternion());
-
-            timeLeft = timeBetweenSpawns;
-        }
+        Instantiate(platformPrefab[Random.Range(0, 3)],
+                new Vector3(35, Random.Range(-6, -2), 0),
+                new Quaternion());
     }
 }
