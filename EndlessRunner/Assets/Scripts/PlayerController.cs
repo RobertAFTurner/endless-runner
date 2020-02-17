@@ -81,9 +81,6 @@ public class PlayerController : MonoBehaviour
                                               extraHeight,
                                               floorLayerMask);
 
-
-        DebugDrawer.DrawDebugCast(collider, cast, extraHeight);
-
         return cast.collider != null;
     }
 }
