@@ -6,7 +6,7 @@ public class PlatformManagerController : MonoBehaviour
     private GameObject[] platformPrefab;
 
     [SerializeField]
-    private float speedIncrimentTime = 5f;
+    private float speedIncrimentTime = 10f;
 
     private float speedIncrimentTimer;
 
@@ -16,10 +16,15 @@ public class PlatformManagerController : MonoBehaviour
     }
     private void Update()
     {
+        IncreasePlatformSpeedOverTime();
+    }
+
+    private void IncreasePlatformSpeedOverTime()
+    {
         speedIncrimentTimer -= Time.deltaTime;
         if (speedIncrimentTimer < 0)
         {
-            GlobalGameStats.platformSpeed += 0.2f;
+            GlobalGameStats.platformSpeed += 0.02f;
             speedIncrimentTimer = speedIncrimentTime;
         }
     }

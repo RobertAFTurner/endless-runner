@@ -43,7 +43,6 @@ public class PlayerController : MonoBehaviour
                 isJumping = true;
                 playerRigidBody.velocity = Vector2.up * jumpHeight;
                 animator.SetBool("isJumping", isJumping);
-                GlobalGameStats.platformSpeed = GlobalGameStats.platformSpeed += 0.1f; 
             }
         }
     }
