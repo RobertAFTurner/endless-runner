@@ -16,7 +16,7 @@ public class ScoreManager : MonoBehaviour
 
     void Update()
     {
-        GlobalGameStats.score += 1;
+        GlobalGameStats.score += GlobalGameStats.platformSpeed * 100f;
         text.text = "Score: " + GlobalGameStats.score;
     }
 }

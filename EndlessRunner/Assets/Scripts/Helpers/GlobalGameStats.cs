@@ -1,6 +1,6 @@
 
 public class GlobalGameStats
 {
-    public static float platformSpeed = 0.01f;
-    public static int score = 0;
+    public static float platformSpeed;
+    public static float score = 0;
 }

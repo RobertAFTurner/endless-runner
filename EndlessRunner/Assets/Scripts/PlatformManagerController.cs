@@ -7,12 +7,16 @@ public class PlatformManagerController : MonoBehaviour
 
     [SerializeField]
     private float speedIncrimentTime = 10f;
-
+    
+    [SerializeField]
+    private float platformStartSpeed;
+    
     private float speedIncrimentTimer;
 
     private void Start()
     {
         speedIncrimentTimer = speedIncrimentTime;
+        GlobalGameStats.platformSpeed = platformStartSpeed;
     }
     private void Update()
     {
