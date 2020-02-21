@@ -16,23 +16,31 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private Animator animator;
+    
+    [SerializeField]
+    private float boostTime;
+
+    [SerializeField]
+    private float startSpeed;
+
+    [SerializeField]
+    GameObject boostEffect;
 
     private float jumpTime;
     private bool isJumping = false;
     private Rigidbody2D playerRigidBody;
-
     private float currentSpeed;
-
-    [SerializeField]
-    private float boostTime;
     private float boostTimer;
     private bool isBoosting = false;
+    private bool canBoost = true;
 
     void Start()
     {
         playerRigidBody = GetComponent<Rigidbody2D>();
         jumpTime = totalJumpTime;
         boostTimer = boostTime;
+        currentSpeed = startSpeed;
+        GlobalGameStats.platformSpeed = currentSpeed;
     }
 
     void Update()
@@ -48,25 +56,34 @@ public class PlayerController : MonoBehaviour
         {
             if (IsGrounded() || isBoosting)
             {
-                jumpTime = totalJumpTime;
-                isJumping = true;
-                isBoosting = false;
+                EndBoost();
+                isJumping = true;                
                 playerRigidBody.velocity = Vector2.up * jumpHeight;
-                animator.SetBool("isJumping", isJumping);
-                animator.SetBool("isBoosting", isBoosting);
+                animator.SetBool("isJumping", isJumping);              
             }
         }        
     }
 
     private void HandleBoost()
     {
+        if(IsGrounded())
+            canBoost = true;
+
+
         if(Input.GetKeyDown(KeyCode.Return) && !isBoosting)
         {
+            if(!canBoost)
+                return;
+
+            EndJump();
+
             currentSpeed = GlobalGameStats.platformSpeed;
             GlobalGameStats.platformSpeed = currentSpeed * boostSpeed;
             isBoosting = true;
-            isJumping = false;
-            animator.SetBool("isJumping", isJumping);
+            canBoost = false;
+            
+            boostEffect.SetActive(true);
+            animator.SetBool("isJumping", false);
             animator.SetBool("isBoosting", isBoosting);
         }
 
@@ -75,12 +92,24 @@ public class PlayerController : MonoBehaviour
             boostTimer -= Time.deltaTime;
             if(boostTimer < 0)
             {
-                GlobalGameStats.platformSpeed = currentSpeed;
-                isBoosting = false;
-                boostTimer = boostTime;
-                animator.SetBool("isBoosting", isBoosting);
+                EndBoost();
             }
         }
+    }
+
+    private void EndBoost()
+    {
+        GlobalGameStats.platformSpeed = currentSpeed;
+        isBoosting = false;
+        boostTimer = boostTime;
+        boostEffect.SetActive(false);
+        animator.SetBool("isBoosting", false);
+    }
+
+    private void EndJump()
+    {
+        isJumping = false;
+        jumpTime = totalJumpTime;
     }
 
     private void MaintainAir()
@@ -99,7 +128,9 @@ public class PlayerController : MonoBehaviour
         }
 
         if (Input.GetKeyUp(KeyCode.Space))
-            isJumping = false;
+        {
+            EndJump();
+        }
 
         if (!isJumping && IsGrounded())
             animator.SetBool("isJumping", isJumping);
