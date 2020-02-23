@@ -49,9 +49,11 @@ SpriteShapeRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -60,6 +62,7 @@ SpriteShapeRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -80,8 +83,8 @@ SpriteShapeRenderer:
   - {fileID: 21300000, guid: 20b017a9d7bd9d344b49e077548237b8, type: 3}
   - {fileID: 21300000, guid: 20b017a9d7bd9d344b49e077548237b8, type: 3}
   m_LocalAABB:
-    m_Center: {x: -0.34672737, y: 0.81499183, z: -0.0025000002}
-    m_Extent: {x: 20.748789, y: 3.5986114, z: 0.0025000002}
+    m_Center: {x: -0.29567719, y: 0.7606962, z: -0.00403}
+    m_Extent: {x: 20.69477, y: 3.6499317, z: 0.00403}
 --- !u!114 &8242759951110116340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,12 +200,19 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 2d09235b3eea08e4388bd299da79c4e8, type: 2}
+  m_FillPixelPerUnit: 100
+  m_StretchTiling: 1
   m_SplineDetail: 16
   m_AdaptiveUV: 0
-  m_UpdateCollider: 1
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
+  m_CornerAngleThreshold: 30
   m_ColliderDetail: 4
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 1
+  m_OptimizeCollider: 1
+  m_OptimizeGeometry: 1
+  m_EnableTangents: 0
 --- !u!68 &8388293797975855281
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -286,7 +296,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e25b3a67f6a4f95408377f6931a740ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  platformMoveSpeed: 0.1
 --- !u!50 &9117052199713281935
 Rigidbody2D:
   serializedVersion: 4
